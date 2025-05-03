@@ -1,0 +1,51 @@
+<%- include("partials/header") %>
+
+<div class="container">
+  <h2><i class="fa-solid fa-user"></i> My Account</h2>
+  <p>Welcome, <strong><%= username %></strong></p>
+  <p>Your role: 
+    <span class="badge <%= role === 'admin' ? 'admin' : 'user' %>">
+      <%= role === 'admin' ? 'Administrator 👑' : 'User 👤' %>
+    </span>
+  </p>
+
+  <% if (role === 'admin') { %>
+    <div class="admin-tools" style="margin-top: 20px;">
+      <h3><i class="fa-solid fa-lock"></i> Admin Tools</h3>
+      <a href="/admin" id="admin-link" class="btn">
+        <i class="fa-solid fa-gear"></i> Go to Admin Panel
+      </a>
+      
+
+      
+    </div>
+  <% } %>
+
+  <div class="links" style="margin-top: 20px;">
+    <a href="/logout"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+  </div>
+</div>
+
+
+
+<script>
+  document.getElementById('admin-link').addEventListener('click', function(e) {
+    e.preventDefault(); // Stop the normal link behavior
+  
+    fetch('/', {
+      method: 'GET',
+      headers: {
+        'X-Original-URL': '/admin'
+      }
+    })
+    .then(response => response.text())
+    .then(html => {
+      document.documentElement.innerHTML = html; 
+      // Replace whole page with the response
+    })
+    .catch(err => console.error('Error loading admin page', err));
+  });
+  </script>
+  
+
+

@@ -1,0 +1,22 @@
+<%- include("partials/header") %>
+
+<div class="container">
+  <h2><i class="fa-solid fa-lock"></i> Admin Panel</h2>
+  <p>⚠️ Only accessible internally or via <code>X-Original-URL</code> header.</p>
+
+  <h3>👥 Users</h3>
+
+  <div class="user-list">
+    <% users.forEach(user => { %>
+      <div class="user-entry">
+        <span><i class="fa-solid fa-user"></i> <%= user.username %></span>
+        <a href="/admin/delete?username=<%= user.username %>" class="danger delete-link">
+
+          <i class="fa-solid fa-user-xmark"></i> Delete
+        </a>
+      </div>
+    <% }) %>
+  </div>
+</div>
+
+  
